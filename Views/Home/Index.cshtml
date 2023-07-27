@@ -1,0 +1,87 @@
+@model SpotifyExploringWeb.Models.PlaylistResponse
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spotify Song Lister</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        .playlist-image {
+            max-width: 200px;
+            display: block;
+            border: 5px solid #007bff;
+            border-radius: 8px;
+            margin: 0 auto 20px;
+        }
+
+        .song-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .song-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #e3e3e3;
+        }
+
+        .album-cover {
+            width: 80px;
+            height: 80px;
+            margin-right: 20px;
+        }
+
+        .song-details {
+            flex: 1;
+        }
+
+        .song-name {
+            font-size: 18px;
+            color: #333333;
+            margin-bottom: 5px;
+        }
+
+        .album-name {
+            font-size: 14px;
+            color: #666666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="@Model.Images[0].Url" alt="Playlist Image" class="playlist-image">
+        <h1>@Model.Name</h1>
+        <ul class="song-list">
+            @foreach (var trackItem in Model.Tracks.Items)
+            {
+                var albumCoverUrl = trackItem.Track.Album.Images.Count > 0 ? trackItem.Track.Album.Images[0].Url : "https://via.placeholder.com/80";
+                <li class="song-item">
+                    <img src="@albumCoverUrl" alt="Album Cover" class="album-cover">
+                    <div class="song-details">
+                        <div class="song-name">@trackItem.Track.Name</div>
+                        <div class="album-name">Album: @trackItem.Track.Album.Name</div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</body>
+</html>
