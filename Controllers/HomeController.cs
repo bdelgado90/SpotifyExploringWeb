@@ -18,8 +18,8 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         // Read Spotify API credentials from the KeyVault
-        var clientId = configuration["SpotifyClientId"];
-        var clientSecret = configuration["SpotifyClientSecret"];
+        var clientId = configuration["SpotifyApi:ClientId"];
+        var clientSecret = configuration["SpotifyApi:ClientSecret"];
 
         // Get the access token
         var accessToken = await spotifyService.GetAccessToken(clientId!, clientSecret!);
